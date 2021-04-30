@@ -3,7 +3,7 @@ Task                                            Issued                      Done
 DPI2: less G, more R/B                          30/04
 
 Legend: Scale                                   30/04                   
-    -> write numbers in an image
+    -> write numbers in an image                
             OR
     -> write text in an image
 
