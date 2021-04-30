@@ -1,0 +1,15 @@
+Task                                            Issued                      Done
+
+DPI2: less G, more R/B                          30/04
+
+Legend: Scale                                   30/04                   
+    -> write numbers in an image
+            OR
+    -> write text in an image
+
+Aspect:                                         
+    -> Add band around the image                30/04
+
+Concept:
+    -> How to write a gif?                      30/04
+
