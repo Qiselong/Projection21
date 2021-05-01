@@ -6,17 +6,17 @@ import numpy as np
 
 # L = [ [], [], [], [], []]
 # Li correspond to the matrix to generate the form of the character i. it's done using font_generate. 
-
-
 def font_generate(L, data): #i got bored lol
     '''
     L: a list of exactly 5 list that may be empty.
+    works for a 7x(7n) image
     each sub list of L, for instance L[i] correspond to the index to whiten at the i-th line.
     '''
     for i in range(0, 5):
         for j in L[i]:
             data[i+1, j] = [255,255,255]
     return data
+
 ## 1
 l, h = 7,7
 
@@ -166,10 +166,9 @@ img.save('images/fonts/0.png')
 def concatenate_font(L):
     '''
     L: list on matrix Li.
-    uses the content of the matrix Li to return a data.
+    uses the content of the matrix Li to return a big List corresponding to the suite of characters.
     '''
-    n = len(L)
-    data = np.zeros((7, n*7, 3), dtype = np.uint8)
+    
 
     Lt = L[0]
 
@@ -177,24 +176,36 @@ def concatenate_font(L):
         for k in range(5): #line loop
             for pos in L[i][k]:
                 Lt[k].append(pos+7*i) #ndlr: L[i][k] corresponds to list of pixel to whiten. *7*i allows to space the things properly
-    data = font_generate(Lt, data)
 
-    return data
+    return Lt
 
-img = Image.fromarray(concatenate_font([L1, L0]), 'RGB')
-img.save('images/fonts/10.png')
+#print(concatenate_font([L0, L0]))
+
+
+L1 = [ [1,2,3], [3], [3], [3], [1,2,3,4,5] ]
 
 
 ## Recognition
 ## now we give a number (as a str) and we put it in an image.
 
-def recognition(num):
+def recognition(num): #IS OK \/
+    L0 = [ [2,3,4], [1,4,5], [1,3,5], [1,2,5], [2,3,4] ]
+    L1 = [ [1,2,3], [3], [3], [3], [1,2,3,4,5] ]
+    L2 = [ [2,3,4], [1,5], [3,4], [2], [1,2,3,4,5] ]
+    L3 = [ [1,2,3,4], [5], [2,3,4], [5], [1,2,3,4] ]
+    L4 = [ [4], [3,4] , [2,4], [1,2,3,4,5], [4] ]
+    L5 = [ [1,2,3,4,5], [1], [1,2,3,4], [5], [1,2,3,4] ]
+    L6 = [ [2,3,4], [1], [1,2,3,4], [1,5], [2,3,4] ]
+    L7 = [ [1,2,3,4,5], [5], [4], [3], [2] ]
+    L8 = [ [2,3,4], [1,5], [2,3,4], [1,5], [2,3,4] ]
+    L9 = [ [2,3,4], [1,5], [2,3,4,5], [5], [2,3,4] ]
+
     L = []
     for e in num:
         if e == '0':
-            L+=L0
+            L.append(L0)
         if e == '1':
-            L+=L1
+            L.append(L1)
         if e == '2':
             L.append(L2)
         if e == '3':
@@ -215,13 +226,37 @@ def recognition(num):
 
 
 def num_to_png(num):
-    L = recognition(num)
-    img = Image.fromarray(concatenate_font(L), 'RGB')
+    L11 = recognition(num)
+    data = np.zeros((7,7,3), dtype = np.uint8)
+    data = font_generate(L11[0], data)
+    for i in range(1,len(L11)):  #pour chaque caractère
+        datatmp = np.zeros((7,7,3), dtype = np.uint8)
+        datatmp = font_generate(L11[i], datatmp)
+        data = np.concatenate((data, datatmp), axis=1)
+    img = Image.fromarray(data, 'RGB')
     img.save('images/fonts/'+num+'.png')
 
-print(recognition('1111'))
-num_to_png('1111')
+#L11c = concatenate_font(L11)
+#print(L11c)
+#dataL11C = np.zeros((7,7*len(L11c),3), dtype = np.uint8)
+#print(dataL11C)
+
+#dataL11C = font_generate(L11c, dataL11C)
+#img = Image.fromarray(dataL11C, 'RGB')
+#img.save('images/fonts/TEST.png')
+
+#print(len(L11))
+#L12 = concatenate_font([L0, L0])
+#print(concatenate_font(L12))
+#print(len(L11))
+#print(L11[1] == L1)
+#print(concatenate_font(L11))
 #num_to_png('8758208602097')
+
+num_to_png('69420')
+
+#L11 est donc une liste de liste de char sous forme font.
+
 
 
 
