@@ -1,15 +1,21 @@
 Task                                            Issued                      Done
 
-DPI2: less G, more R/B                          30/04
+DPI2: less G, more R/B                          30/04                       1/05
 
 Legend: Scale                                   30/04                   
-    -> write numbers in an image                
-            OR
-    -> write text in an image
+    -> write numbers in an image                                            1/05
+            OR write text in an image
+    -> Scale band                               1/05
 
 Aspect:                                         
     -> Add band around the image                30/04
 
 Concept:
     -> How to write a gif?                      30/04
+
+Features:
+    -> Image sharpening                         1/05
+        -> in a gif                             1/05
+    -> Graphs plotting for further process
+        -> power method as a gif
 
